@@ -1,5 +1,9 @@
 package request
 
+type UserGoogleAuthentication struct {
+	GoogleJWT *string
+}
+
 type ReqDataUser struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
