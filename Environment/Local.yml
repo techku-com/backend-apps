@@ -1,0 +1,24 @@
+app:
+  name: "tech-ku"
+  debug: true
+  port: "3000"
+  host: "localhost"
+  service: "http"
+  certificate :
+  pem_key :
+databases:
+ - name: "techku"
+   engine: "postgres"
+   username: "postgres"
+   password: "root1234"
+   port: "49154"
+   host: "localhost"
+   maximum_connection: 20
+   maximum_idle_time: 30
+   usage: "Main databases!"
+   connection: "mainDB"
+jwt:
+  secretkey: "971231njmksdj123j123ksidj1"
+  encrypt: "HS256"
+auth:
+  token: "93df98b75e69befc6536d72f7f6cf8c3"
