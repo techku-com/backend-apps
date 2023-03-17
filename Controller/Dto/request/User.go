@@ -1,7 +1,7 @@
 package request
 
 type UserGoogleAuthentication struct {
-	GoogleJWT *string
+	GoogleJWT *string `json:"google_token"`
 }
 
 type ReqDataUser struct {

@@ -71,7 +71,7 @@ func ValidateGoogleJWT(tokenString string) (GoogleClaims, error) {
 		return GoogleClaims{}, errors.New("iss is invalid")
 	}
 
-	if claims.Audience != "YOUR_CLIENT_ID_HERE" {
+	if claims.Audience != "112669841004-rut3m8h50p7pf50jf1cf5veo1hkiq891.apps.googleusercontent.com" {
 		return GoogleClaims{}, errors.New("aud is invalid")
 	}
 

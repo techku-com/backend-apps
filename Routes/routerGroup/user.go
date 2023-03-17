@@ -10,7 +10,7 @@ type iUserGroup interface {
 }
 
 func (r userGroup) UserApiGroup(group *gin.RouterGroup, api User.UserControllerInterface) {
-
+	group.POST("/authenticate", api.LoginHandlerGoogle)
 }
 
 type userGroup struct{}
