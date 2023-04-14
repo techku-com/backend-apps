@@ -17,7 +17,7 @@ type ResponsePublisher struct {
 type setResponse struct {
 	Status     string      `json:"status"`
 	Data       interface{} `json:"data"`
-	AccessTime string      `json:"accessTime"`
+	AccessTime string      `json:"access_time"`
 }
 
 func HttpResponseSuccess(g *gin.Context, data interface{}) {

@@ -3,6 +3,7 @@ package User
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	validator "github.com/vincentius93/govalidator"
 	"techku/Constant"
 	"techku/Controller/Dto"
 	"techku/Controller/Dto/request"
@@ -12,6 +13,56 @@ import (
 type UserControllerInterface interface {
 	Ping(g *gin.Context)
 	LoginHandlerGoogle(g *gin.Context)
+	RegisterAccount(g *gin.Context)
+	LoginAccount(g *gin.Context)
+}
+
+func (u user) LoginAccount(g *gin.Context) {
+	var dataRequest request.UserLogin
+	err := g.ShouldBind(&dataRequest)
+	if err != nil {
+		Helper.HttpResponseError(g,
+			Constant.InvalidJsonRequest.GetErrorStatus().Error,
+			Constant.InvalidJsonRequest.GetErrorStatus().Code, err)
+		return
+	}
+
+	response, err := u.Modules.UserModule.LoginAccount(dataRequest)
+	if err != nil {
+		Helper.HttpResponseError(g,
+			Constant.InvalidLogin.GetErrorStatus().Error,
+			Constant.InvalidLogin.GetErrorStatus().Code, err)
+		return
+	}
+	Helper.HttpResponseSuccess(g, response)
+	return
+}
+
+func (u user) RegisterAccount(g *gin.Context) {
+	var dataRequest request.UserRegistration
+	err := g.ShouldBind(&dataRequest)
+	if err != nil {
+		Helper.HttpResponseError(g,
+			Constant.InvalidJsonRequest.GetErrorStatus().Error,
+			Constant.InvalidJsonRequest.GetErrorStatus().Code, err)
+		return
+	}
+	err = validator.Validate(dataRequest)
+	if err != nil {
+		Helper.HttpResponseError(g,
+			Constant.InvalidRegister.GetErrorStatus().Error,
+			Constant.InvalidRegister.GetErrorStatus().Code, err)
+		return
+	}
+	response, err := u.Modules.UserModule.RegisterNewAccounts(dataRequest)
+	if err != nil {
+		Helper.HttpResponseError(g,
+			Constant.InvalidRegister.GetErrorStatus().Error,
+			Constant.InvalidRegister.GetErrorStatus().Code, err)
+		return
+	}
+	Helper.HttpResponseSuccess(g, response)
+	return
 }
 
 func (u user) LoginHandlerGoogle(g *gin.Context) {

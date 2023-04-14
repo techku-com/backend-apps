@@ -11,6 +11,8 @@ const (
 	InvalidJsonRequest ErrorType = iota
 	InvalidGoogleAuth
 	InvalidGoogleEmail
+	InvalidRegister
+	InvalidLogin
 )
 
 func (p ErrorType) GetErrorStatus() ErrorStruct {
@@ -26,6 +28,14 @@ func (p ErrorType) GetErrorStatus() ErrorStruct {
 		InvalidGoogleEmail: {
 			Code:  403,
 			Error: "Invalid Google Email",
+		},
+		InvalidRegister: {
+			Code:  403,
+			Error: "Invalid Registration",
+		},
+		InvalidLogin: {
+			Code:  403,
+			Error: "Invalid Login",
 		},
 	}
 	return errorCategory[p]

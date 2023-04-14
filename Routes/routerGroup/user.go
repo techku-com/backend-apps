@@ -11,6 +11,8 @@ type iUserGroup interface {
 
 func (r userGroup) UserApiGroup(group *gin.RouterGroup, api User.UserControllerInterface) {
 	group.POST("/authenticate", api.LoginHandlerGoogle)
+	group.POST("/register", api.RegisterAccount)
+	group.POST("/login", api.LoginAccount)
 }
 
 type userGroup struct{}

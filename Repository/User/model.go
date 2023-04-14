@@ -2,10 +2,14 @@ package User
 
 import (
 	"techku/Config"
+	"techku/Controller/Dto/request"
+	"techku/Controller/Dto/response"
 )
 
 type Repository interface {
 	CheckExistsUser()
+	GetAccountInfo(params request.UserLogin) (response response.UserLogin, err error)
+	RegisterNewAccounts(params request.UserRegistration) (response response.UserRegistration, err error)
 }
 
 //CONSTRUCTOR STRUCT
