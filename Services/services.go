@@ -8,6 +8,7 @@ import (
 	"techku/Controller"
 	"techku/Controller/Dto"
 	"techku/Modules"
+	"techku/Modules/Order"
 	"techku/Modules/User"
 	"techku/Repository"
 	"techku/Routes"
@@ -40,7 +41,8 @@ func AppInitialization() {
 	utilities := Dto.Utilities{
 		Jwt: service.Jwt,
 		Modules: Modules.Modules{
-			UserModule: User.NewModules(Repository.InitRepo(connection)),
+			UserModule:  User.NewModules(Repository.InitRepo(connection)),
+			OrderModule: Order.NewModules(Repository.InitRepo(connection)),
 		},
 	}
 	newConfig.Routes = &Routes.Routes{

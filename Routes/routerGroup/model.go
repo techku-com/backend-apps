@@ -1,9 +1,11 @@
 package routerGroup
 
 type apiGroup struct {
-	User iUserGroup
+	User  iUserGroup
+	Order iOrderGroup
 }
 
 var RoutesGroupCollection = apiGroup{
-	User: newRouterGroup(),
+	User:  newUserRouterGroup(),
+	Order: newOrderRouterGroup(),
 }

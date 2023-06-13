@@ -17,6 +17,6 @@ func (r userGroup) UserApiGroup(group *gin.RouterGroup, api User.UserControllerI
 
 type userGroup struct{}
 
-func newRouterGroup() iUserGroup {
+func newUserRouterGroup() iUserGroup {
 	return &userGroup{}
 }

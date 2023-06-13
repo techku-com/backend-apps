@@ -22,5 +22,8 @@ func (app *Routes) CollectRoutes() *gin.Engine {
 	//tracking api
 	userGroup := appRoute.Group("/users")
 	apiGroup.User.UserApiGroup(userGroup, app.Controller.Users)
+
+	orderGroup := appRoute.Group("/orders")
+	apiGroup.Order.OrderApiGroup(orderGroup, app.Controller.Orders)
 	return appRoute
 }
