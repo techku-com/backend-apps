@@ -1,0 +1,46 @@
+package Order
+
+import (
+	"github.com/gin-gonic/gin"
+	validator "github.com/vincentius93/govalidator"
+	"net/http"
+	"techku/Constant"
+	"techku/Controller/Dto"
+	"techku/Controller/Dto/request"
+	"techku/Library/Helper"
+)
+
+type OrderControllerInterface interface {
+	NewOrder(g *gin.Context)
+}
+
+func (o order) NewOrder(g *gin.Context) {
+	var dataRequest request.AddNewOrder
+	err := g.ShouldBind(&dataRequest)
+	if err != nil {
+		Helper.HttpResponseError(g,
+			Constant.InvalidJsonRequest.GetErrorStatus().Error,
+			Constant.InvalidJsonRequest.GetErrorStatus().Code, err)
+		return
+	}
+	err = validator.Validate(dataRequest)
+	if err != nil {
+		Helper.HttpResponseError(g,
+			Constant.InvalidOrder.GetErrorStatus().Error,
+			Constant.InvalidOrder.GetErrorStatus().Code, err)
+		return
+	}
+	err = o.Modules.OrderModule.AddNewOrder(dataRequest)
+	if err != nil {
+		Helper.HttpResponseError(g,
+			Constant.InvalidOrder.GetErrorStatus().Error,
+			Constant.InvalidOrder.GetErrorStatus().Code, err)
+		return
+	}
+	Helper.HttpResponseSuccess(g, http.StatusOK)
+	return
+}
+
+func NewController(u Dto.Utilities) OrderControllerInterface {
+	return &order{u}
+}

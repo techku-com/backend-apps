@@ -1,10 +1,12 @@
 package Modules
 
 import (
+	"techku/Modules/Order"
 	"techku/Modules/User"
 )
 
 type Modules struct {
-	UserModule User.UserModules
+	UserModule  User.UserModules
+	OrderModule Order.OrderModules
 	//repositories
 }

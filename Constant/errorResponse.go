@@ -13,6 +13,7 @@ const (
 	InvalidGoogleEmail
 	InvalidRegister
 	InvalidLogin
+	InvalidOrder
 )
 
 func (p ErrorType) GetErrorStatus() ErrorStruct {
@@ -36,6 +37,10 @@ func (p ErrorType) GetErrorStatus() ErrorStruct {
 		InvalidLogin: {
 			Code:  403,
 			Error: "Invalid Login",
+		},
+		InvalidOrder: {
+			Code:  403,
+			Error: "Invalid Order",
 		},
 	}
 	return errorCategory[p]

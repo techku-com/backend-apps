@@ -17,9 +17,13 @@ func (u user) GetAccountInfo(params request.UserLogin) (response response.UserLo
 
 func (u user) RegisterNewAccounts(params request.UserRegistration) (response response.UserRegistration, err error) {
 	connection := u.dbCon.PostgreMainCon()
-	query := `INSERT INTO accounts.t_user_accounts (username, email, password)
-				VALUES ($1, $2, $3) RETURNING username, email, password, TO_CHAR(created_at, 'DD-MM-YYYY HH:MI:SS')`
-	err = connection.QueryRow(query, params.Username, params.Email, params.Password).Scan(&response.Username, &response.Email,
+	query := `INSERT INTO accounts.t_user_accounts (username, email, password, role, phone, description)
+				VALUES ($1, $2, $3, $4, $5, $6) RETURNING username, email, password, TO_CHAR(created_at, 'DD-MM-YYYY HH:MI:SS')`
+	userRole := "USER"
+	if params.IsSeller {
+		userRole = "TECHNICIAN"
+	}
+	err = connection.QueryRow(query, params.Username, params.Email, params.Password, userRole, params.Phone, params.Desc).Scan(&response.Username, &response.Email,
 		&response.Password, &response.CreatedAt)
 	return
 }

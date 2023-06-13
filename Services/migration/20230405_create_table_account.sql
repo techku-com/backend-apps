@@ -7,6 +7,8 @@ CREATE TABLE accounts.t_user_accounts (
      password             VARCHAR(255),
      role                 account_role DEFAULT 'USER',
      is_admin             BOOLEAN,
+     phone                VARCHAR(50),
+     description          VARCHAR(255),
      created_at           TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
      updated_at           TIMESTAMP WITHOUT TIME ZONE
 );
