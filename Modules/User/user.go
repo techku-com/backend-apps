@@ -9,6 +9,10 @@ import (
 func (u user) LoginAccount(params request.UserLogin) (response response.UserLogin, err error) {
 	response, err = u.repo.User.GetAccountInfo(params)
 	err = bcrypt.CompareHashAndPassword([]byte(response.Password), []byte(params.Password))
+	if err != nil {
+		return
+	}
+	response.Password = ""
 	return
 }
 

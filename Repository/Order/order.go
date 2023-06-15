@@ -7,24 +7,22 @@ import (
 
 func (o order) NewOrder(params request.AddNewOrder) (err error) {
 	connection := o.dbCon.PostgreMainCon()
-	query := `INSERT INTO orders.t_orders (created_by, description, location, contact_person, hardware_type, service_type, scheduled_date)
-				VALUES ($1, $2, $3, $4, $5, $6, $7)`
-	_, err = connection.Exec(query, params.UserId, params.Description, params.Location,
-		params.ContactPerson, params.HardwareType, params.ServiceType, params.ScheduleDate)
+	query := `INSERT INTO orders.t_orders (created_by, issues, address, status)
+				VALUES ($1, $2, $3, 1)`
+	_, err = connection.Exec(query, params.UserId, params.Issues, params.Address)
 	return
 }
 
 func (o order) AllOrderList() (resp []response.AllOrders, err error) {
 	connection := o.dbCon.PostgreMainCon()
 	query := `SELECT 
-    			created_by, 
-    			description, 
-    			location, 
-    			contact_person, 
-    			hardware_type, 
-    			service_type, 
-    			schedule_date
-			FROM orders.t_orders to WHERE to.taken_by = null`
+    			tac.username, 
+    			tod.issues, 
+    			tod.address,
+    			tod.status
+			FROM orders.t_orders tod
+			LEFT JOIN accounts.t_user_accounts tac ON tac.id = tod.created_by
+			WHERE tod.taken_by is NULL`
 	rows, err := connection.Query(query)
 	if err != nil {
 		return
@@ -33,7 +31,7 @@ func (o order) AllOrderList() (resp []response.AllOrders, err error) {
 
 	for rows.Next() {
 		var order response.AllOrders
-		err = rows.Scan(&order.CreatedBy, &order.Description, &order.Location, &order.ContactPerson, &order.HardwareType, &order.ServiceType, &order.ScheduleDate)
+		err = rows.Scan(&order.CreatedBy, &order.Issues, &order.Address, &order.Status)
 		if err != nil {
 			return
 		}

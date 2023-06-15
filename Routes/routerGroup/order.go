@@ -11,7 +11,7 @@ type iOrderGroup interface {
 
 func (o orderGroup) OrderApiGroup(group *gin.RouterGroup, api Order.OrderControllerInterface) {
 	group.POST("/create", api.NewOrder)
-	group.POST("/list/{status}", api.ListOrder)
+	group.GET("/list", api.ListOrder)
 }
 
 type orderGroup struct{}
