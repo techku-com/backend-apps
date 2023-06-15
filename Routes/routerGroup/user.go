@@ -13,6 +13,7 @@ func (r userGroup) UserApiGroup(group *gin.RouterGroup, api User.UserControllerI
 	group.POST("/authenticate", api.LoginHandlerGoogle)
 	group.POST("/register", api.RegisterAccount)
 	group.POST("/login", api.LoginAccount)
+	group.GET("/my-order/:user_id", api.MyOrderList)
 }
 
 type userGroup struct{}

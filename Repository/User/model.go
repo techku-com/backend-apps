@@ -10,6 +10,7 @@ type Repository interface {
 	CheckExistsUser()
 	GetAccountInfo(params request.UserLogin) (response response.UserLogin, err error)
 	RegisterNewAccounts(params request.UserRegistration) (response response.UserRegistration, err error)
+	MyOrderList(userId int) (response []response.MyOrderList, err error)
 }
 
 //CONSTRUCTOR STRUCT

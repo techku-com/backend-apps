@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	validator "github.com/vincentius93/govalidator"
+	"strconv"
 	"techku/Constant"
 	"techku/Controller/Dto"
 	"techku/Controller/Dto/request"
@@ -15,6 +16,26 @@ type UserControllerInterface interface {
 	LoginHandlerGoogle(g *gin.Context)
 	RegisterAccount(g *gin.Context)
 	LoginAccount(g *gin.Context)
+	MyOrderList(g *gin.Context)
+}
+
+func (u user) MyOrderList(g *gin.Context) {
+	userId, err := strconv.Atoi(g.Param("user_id"))
+	if err != nil {
+		Helper.HttpResponseError(g,
+			Constant.InvalidJsonRequest.GetErrorStatus().Error,
+			Constant.InvalidJsonRequest.GetErrorStatus().Code, err)
+		return
+	}
+
+	response, err := u.Modules.UserModule.MyOrderList(userId)
+	if err != nil {
+		Helper.HttpResponseError(g,
+			Constant.InvalidJsonRequest.GetErrorStatus().Error,
+			Constant.InvalidJsonRequest.GetErrorStatus().Code, err)
+		return
+	}
+	Helper.HttpResponseSuccess(g, response)
 }
 
 func (u user) LoginAccount(g *gin.Context) {

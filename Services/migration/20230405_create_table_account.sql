@@ -5,7 +5,7 @@ CREATE TABLE accounts.t_user_accounts (
      username             VARCHAR(50) UNIQUE,
      email                VARCHAR(50) UNIQUE,
      password             VARCHAR(255),
-     role                 account_role DEFAULT 'USER',
+     role                 account_role DEFAULT 'CUSTOMER',
      is_admin             BOOLEAN,
      phone_number         VARCHAR(50),
      created_at           TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),

@@ -26,6 +26,11 @@ func (u user) RegisterNewAccounts(params request.UserRegistration) (response res
 	return
 }
 
+func (u user) MyOrderList(userId int) (resp []response.MyOrderList, err error) {
+	resp, err = u.repo.User.MyOrderList(userId)
+	return
+}
+
 func (u user) GetUser() {
 	u.repo.User.CheckExistsUser()
 }

@@ -9,6 +9,8 @@ import (
 type Repository interface {
 	NewOrder(params request.AddNewOrder) (err error)
 	AllOrderList() (resp []response.AllOrders, err error)
+	RateOrder(params request.RateOrder) (resp response.RateOrder, err error)
+	UpdateOrder(params request.UpdateOrder) (resp response.UpdatedOrder, err error)
 }
 
 // CONSTRUCTOR STRUCT

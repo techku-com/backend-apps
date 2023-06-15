@@ -42,3 +42,22 @@ func (o order) AllOrderList() (resp []response.AllOrders, err error) {
 	}
 	return
 }
+
+func (o order) RateOrder(params request.RateOrder) (resp response.RateOrder, err error) {
+	connection := o.dbCon.PostgreMainCon()
+	query := `
+		INSERT INTO accounts.t_user_accounts_rating (created_by, created_to, order_id, description, rating)
+				VALUES ($1, $2, $3, $4, $5) RETURNING description, rating, order_id
+	`
+	err = connection.QueryRow(query, params.UserId, params.TechId, params.OrderId, params.Description, params.Rating).Scan(&resp.Description,
+		&resp.Rating, &resp.OrderId)
+	return
+}
+
+func (o order) UpdateOrder(params request.UpdateOrder) (resp response.UpdatedOrder, err error) {
+	connection := o.dbCon.PostgreMainCon()
+	query := `UPDATE orders.t_orders SET status = $1, updated_at = NOW()
+					WHERE id = $2 AND created_by = $3 RETURNING status, id`
+	err = connection.QueryRow(query, params.NewStatus, params.OrderId, params.UserId).Scan(&resp.Status, &resp.OrderId)
+	return
+}

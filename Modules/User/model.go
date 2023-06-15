@@ -14,6 +14,7 @@ type UserModules interface {
 	GetUser()
 	RegisterNewAccounts(params request.UserRegistration) (response response.UserRegistration, err error)
 	LoginAccount(params request.UserLogin) (response response.UserLogin, err error)
+	MyOrderList(userId int) (response []response.MyOrderList, err error)
 }
 
 func NewModules(Repo Repository.Repository) UserModules {

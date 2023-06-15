@@ -14,3 +14,13 @@ func (o order) GetAllOrders() (response []response.AllOrders, err error) {
 	response, err = o.repo.Order.AllOrderList()
 	return
 }
+
+func (o order) RateOrder(params request.RateOrder) (resp response.RateOrder, err error) {
+	resp, err = o.repo.Order.RateOrder(params)
+	return
+}
+
+func (o order) UpdateOrder(params request.UpdateOrder) (resp response.UpdatedOrder, err error) {
+	resp, err = o.repo.Order.UpdateOrder(params)
+	return
+}
