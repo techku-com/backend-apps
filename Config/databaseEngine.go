@@ -26,7 +26,6 @@ func (env *database) PostgresConnectionPool(Connection interface{}) {
 	if err != nil {
 		//panic err
 		panic(err.Error())
-		return
 	}
 	Connection.(*sql.DB).SetMaxOpenConns(env.Maximum_connection)
 	Connection.(*sql.DB).SetConnMaxIdleTime(env.MaximumIdleTime * time.Second)
@@ -35,7 +34,6 @@ func (env *database) PostgresConnectionPool(Connection interface{}) {
 	if err != nil {
 		log.Print(err.Error())
 		panic(err.Error())
-		return
 	}
 	return
 }

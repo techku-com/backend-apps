@@ -2,14 +2,15 @@ package Config
 
 import (
 	"database/sql"
-	"github.com/gin-gonic/gin"
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
 	"os"
 	"path"
 	"runtime"
 	"techku/Constant"
+
+	"github.com/gin-gonic/gin"
+	"gopkg.in/yaml.v2"
 )
 
 func GetEnvironment(env string) Config {
@@ -19,7 +20,6 @@ func GetEnvironment(env string) Config {
 	if err != nil {
 		log.Println(err.Error())
 		panic(err)
-		return nil
 	}
 	content, err := ioutil.ReadFile(envPath)
 	if err != nil {
@@ -39,7 +39,7 @@ func (e envFile) LoadConfig() *ConfigSetting {
 		log.Println(err.Error())
 		panic(err)
 	}
-	if config.App.Debug == false {
+	if !config.App.Debug {
 		log.SetOutput(ioutil.Discard)
 	}
 	log.Println("Environment Config load successfully!")
@@ -94,6 +94,5 @@ func (app *app) runWithHttps(route *gin.Engine) {
 		log.Println(err.Error())
 		//panic error
 		panic(err)
-		return
 	}
 }

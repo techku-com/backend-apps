@@ -4,19 +4,19 @@ app:
   port: "3000"
   host: "localhost"
   service: "http"
-  certificate :
-  pem_key :
+  certificate:
+  pem_key:
 databases:
- - name: "techku"
-   engine: "postgres"
-   username: "postgres"
-   password: "root1234"
-   port: "5432"
-   host: "localhost"
-   maximum_connection: 20
-   maximum_idle_time: 30
-   usage: "Main databases!"
-   connection: "mainDB"
+  - name: "techku"
+    engine: "postgres"
+    username: "postgres"
+    password: "root1234"
+    port: "5432"
+    host: "localhost"
+    maximum_connection: 20
+    maximum_idle_time: 30
+    usage: "Main databases!"
+    connection: "mainDB"
 jwt:
   secretkey: "971231njmksdj123j123ksidj1"
   encrypt: "HS256"
