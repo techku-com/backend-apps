@@ -42,31 +42,31 @@ jobs:
       - run:
           name: "Prepare Docker Context"
           command: |
-            docker context create remote_sg --docker "host=ssh://deploy@server.ephorize.org"
+            docker context create remote --docker "host=ssh://deploy@server.ephorize.org"
       - run:
           name: "Login to Docker Hub (on remote)"
           command: |
-            docker --context remote_en login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker --context remote login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - run:
           name: "Pull new image"
           command: |
-            docker --context remote_en pull $DOCKER_USERNAME/yosep-techku-com-backend-apps:$CIRCLE_SHA1
+            docker --context remote pull $DOCKER_USERNAME/yosep-techku-com-backend-apps:$CIRCLE_SHA1
       - run:
           name: "Stop existence Docker"
           command: |
-            docker --context remote_en stop yosep-techku-com-backend-apps || true
+            docker --context remote stop yosep-techku-com-backend-apps || true
       - run:
           name: "Deploy"
           command: |
-            docker --context remote_en run -p 127.0.0.1:13000:3000 --add-host=host.docker.internal:host-gateway yosep-techku-com-backend-apps || true
+            docker --context remote run -p 127.0.0.1:13000:3000 --add-host=host.docker.internal:host-gateway yosep-techku-com-backend-apps || true
       - run:
           name: "Logout"
           command: |
-            docker --context remote_en logout
+            docker --context remote logout
       - run:
           name: "Prune image"
           command: |
-            docker --context remote_en image prune -f
+            docker --context remote image prune -f
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
