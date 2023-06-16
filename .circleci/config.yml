@@ -56,6 +56,10 @@ jobs:
           command: |
             docker --context remote stop techku || true
       - run:
+          name: "Remove existence Docker"
+          command: |
+            docker --context remote rm techku || true
+      - run:
           name: "Deploy"
           command: |
             docker --context remote run -d -p 127.0.0.1:13000:3000 --name techku --add-host=host.docker.internal:host-gateway $DOCKER_USERNAME/yosep-techku-com-backend-apps:$CIRCLE_SHA1 || true
