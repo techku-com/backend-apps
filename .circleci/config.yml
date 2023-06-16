@@ -58,7 +58,7 @@ jobs:
       - run:
           name: "Deploy"
           command: |
-            docker --context remote run -p 127.0.0.1:13000:3000 --add-host=host.docker.internal:host-gateway $DOCKER_USERNAME/yosep-techku-com-backend-apps:$CIRCLE_SHA1 || true
+            docker --context remote run -d -p 127.0.0.1:13000:3000 --add-host=host.docker.internal:host-gateway $DOCKER_USERNAME/yosep-techku-com-backend-apps:$CIRCLE_SHA1 || true
       - run:
           name: "Logout"
           command: |
