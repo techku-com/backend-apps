@@ -24,13 +24,13 @@ jobs:
       - go/save-cache
       - run:
           name: "Build image"
-          command: "docker build --tag $DOCKER_USERNAME/yosep-techku-com-backend-apps:$CIRCLE_SHA1_SHORT ."
+          command: "docker build --tag $DOCKER_USERNAME/yosep-techku-com-backend-apps:$CIRCLE_SHA1 ."
       - run:
           name: "Login to Docker Hub"
           command: "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
       - run:
           name: "Push image to Docker Hub"
-          command: "docker push $DOCKER_USERNAME/yosep-techku-com-backend-apps:$CIRCLE_SHA1_SHORT"
+          command: "docker push $DOCKER_USERNAME/yosep-techku-com-backend-apps:$CIRCLE_SHA1"
   deploy:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
@@ -55,7 +55,7 @@ jobs:
       - run:
           name: "Pull new image"
           command: |
-            docker --context remote_en pull $DOCKER_USERNAME/yosep-techku-com-backend-apps:$CIRCLE_SHA1_SHORT
+            docker --context remote_en pull $DOCKER_USERNAME/yosep-techku-com-backend-apps:$CIRCLE_SHA1
       - run:
           name: "Stop existence Docker"
           command: |
