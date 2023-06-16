@@ -30,9 +30,8 @@ jobs:
   deploy:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    executor:
-      name: go/default
-      tag: '1.18'
+    machine:
+      image: ubuntu-2004:2022.07.1
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
@@ -59,7 +58,7 @@ jobs:
       - run:
           name: "Deploy"
           command: |
-            docker --context remote_en run -p 3000:3000 --add-host=host.docker.internal:host-gateway yosep-techku-com-backend-apps || true
+            docker --context remote_en run -p 127.0.0.1:13000:3000 --add-host=host.docker.internal:host-gateway yosep-techku-com-backend-apps || true
       - run:
           name: "Logout"
           command: |
