@@ -9,9 +9,8 @@ jobs:
   build_and_publish:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    executor:
-      name: go/default
-      tag: '1.18'
+    machine:
+      image: ubuntu-2004:2022.07.1
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
@@ -19,9 +18,6 @@ jobs:
           fingerprints:
             - "ec:3b:b8:07:63:96:5d:cf:20:42:23:2e:b1:e0:43:60" # GitHub as ephorize-dev
       - checkout
-      - go/load-cache
-      - go/mod-download
-      - go/save-cache
       - run:
           name: "Build image"
           command: "docker build --tag $DOCKER_USERNAME/yosep-techku-com-backend-apps:$CIRCLE_SHA1 ."
