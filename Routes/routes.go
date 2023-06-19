@@ -25,5 +25,8 @@ func (app *Routes) CollectRoutes() *gin.Engine {
 
 	orderGroup := appRoute.Group("/orders")
 	apiGroup.Order.OrderApiGroup(orderGroup, app.Controller.Orders)
+
+	homeGroup := appRoute.Group("/home")
+	apiGroup.Home.HomeApiGroup(homeGroup, app.Controller.Home)
 	return appRoute
 }

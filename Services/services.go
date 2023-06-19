@@ -8,6 +8,7 @@ import (
 	"techku/Controller"
 	"techku/Controller/Dto"
 	"techku/Modules"
+	"techku/Modules/Home"
 	"techku/Modules/Order"
 	"techku/Modules/User"
 	"techku/Repository"
@@ -43,6 +44,7 @@ func AppInitialization() {
 		Modules: Modules.Modules{
 			UserModule:  User.NewModules(Repository.InitRepo(connection)),
 			OrderModule: Order.NewModules(Repository.InitRepo(connection)),
+			HomeModule:  Home.NewModules(Repository.InitRepo(connection)),
 		},
 	}
 	newConfig.Routes = &Routes.Routes{
