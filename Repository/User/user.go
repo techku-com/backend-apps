@@ -8,10 +8,10 @@ import (
 
 func (u user) GetAccountInfo(params request.UserLogin) (response response.UserLogin, err error) {
 	connection := u.dbCon.PostgreMainCon()
-	query := `SELECT tac.password, tac.email, tac.id, tac.role
+	query := `SELECT tac.password, tac.email, tac.id, tac.role, tac.username
     		FROM accounts.t_user_accounts tac
 			WHERE tac.email = $1`
-	err = connection.QueryRow(query, params.Email).Scan(&response.Password, &response.Email, &response.UserId, &response.Role)
+	err = connection.QueryRow(query, params.Email).Scan(&response.Password, &response.Email, &response.UserId, &response.Role, &response.Username)
 	return
 }
 

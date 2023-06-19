@@ -5,6 +5,7 @@ type UserLogin struct {
 	Email    string `json:"email"`
 	Password string `json:"password,omitempty"`
 	Role     string `json:"role"`
+	Username string `json:"username"`
 }
 
 type MyOrderList struct {
