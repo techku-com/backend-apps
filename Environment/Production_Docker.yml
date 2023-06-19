@@ -2,7 +2,7 @@ app:
   name: "tech-ku"
   debug: true
   port: "3000"
-  host: "localhost"
+  host: "0.0.0.0"
   service: "http"
   certificate :
   pem_key :
