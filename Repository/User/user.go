@@ -30,6 +30,7 @@ func (u user) RegisterNewAccounts(params request.UserRegistration) (response res
 func (u user) MyOrderList(userId int) (resp []response.MyOrderList, err error) {
 	connection := u.dbCon.PostgreMainCon()
 	query := `SELECT 
+    			tod.id,
     			tac.username, 
     			COALESCE(tac2.username, ''),
     			tac.id,
@@ -52,7 +53,7 @@ func (u user) MyOrderList(userId int) (resp []response.MyOrderList, err error) {
 
 	for rows.Next() {
 		var order response.MyOrderList
-		err = rows.Scan(&order.CreatedByName, &order.TakenByName, &order.CreatedBy, &order.TakenBy, &order.CreatedAt, &order.Issues, &order.Status,
+		err = rows.Scan(&order.OrderId, &order.CreatedByName, &order.TakenByName, &order.CreatedBy, &order.TakenBy, &order.CreatedAt, &order.Issues, &order.Status,
 			&order.Rating.Rating, &order.Rating.Description)
 		if err != nil {
 			return
