@@ -18,4 +18,5 @@ type UpdateOrder struct {
 	OrderId   int `json:"order_id" field:"required" min:"1"`
 	UserId    int `json:"user_id" field:"required" min:"1"`
 	NewStatus int `json:"new_status" field:"required" min:"1"`
+	TakenBy   int `json:"taken_by" field:"required" min:"1"`
 }
