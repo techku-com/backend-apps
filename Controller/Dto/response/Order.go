@@ -1,6 +1,7 @@
 package response
 
 type AllOrders struct {
+	OrderId   int    `json:"order_id"`
 	CreatedBy string `json:"created_by"`
 	Issues    string `json:"issues"`
 	Address   string `json:"address"`

@@ -16,6 +16,7 @@ func (o order) NewOrder(params request.AddNewOrder) (err error) {
 func (o order) AllOrderList() (resp []response.AllOrders, err error) {
 	connection := o.dbCon.PostgreMainCon()
 	query := `SELECT 
+    			tod.id,
     			tac.username, 
     			tod.issues, 
     			tod.address,
@@ -31,7 +32,7 @@ func (o order) AllOrderList() (resp []response.AllOrders, err error) {
 
 	for rows.Next() {
 		var order response.AllOrders
-		err = rows.Scan(&order.CreatedBy, &order.Issues, &order.Address, &order.Status)
+		err = rows.Scan(&order.OrderId, &order.CreatedBy, &order.Issues, &order.Address, &order.Status)
 		if err != nil {
 			return
 		}
