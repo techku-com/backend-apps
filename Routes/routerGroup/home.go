@@ -11,6 +11,7 @@ type iHomeGroup interface {
 
 func (o homeGroup) HomeApiGroup(group *gin.RouterGroup, api Home.HomeControllerInterface) {
 	group.GET("/articles", api.GetArticles)
+	group.GET("/status", api.GetWebStatus)
 }
 
 type homeGroup struct{}

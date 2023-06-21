@@ -7,6 +7,7 @@ import (
 
 type Repository interface {
 	GetArticles() (resp []response.ArticleList, err error)
+	GetStatus() (resp response.WebStatus, err error)
 }
 
 // CONSTRUCTOR STRUCT

@@ -11,6 +11,7 @@ type home struct {
 
 type HomeModules interface {
 	GetArticles() (resp []response.ArticleList, err error)
+	GetStatus() (resp response.WebStatus, err error)
 }
 
 func NewModules(Repo Repository.Repository) HomeModules {

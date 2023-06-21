@@ -9,6 +9,19 @@ import (
 
 type HomeControllerInterface interface {
 	GetArticles(g *gin.Context)
+	GetWebStatus(g *gin.Context)
+}
+
+func (h home) GetWebStatus(g *gin.Context) {
+	response, err := h.Modules.HomeModule.GetStatus()
+	if err != nil {
+		Helper.HttpResponseError(g,
+			Constant.InvalidJsonRequest.GetErrorStatus().Error,
+			Constant.InvalidJsonRequest.GetErrorStatus().Code, err)
+		return
+	}
+	Helper.HttpResponseSuccess(g, response)
+	return
 }
 
 func (h home) GetArticles(g *gin.Context) {
