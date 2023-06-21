@@ -1,11 +1,12 @@
 package response
 
 type AllOrders struct {
-	OrderId   int    `json:"order_id"`
-	CreatedBy string `json:"created_by"`
-	Issues    string `json:"issues"`
-	Address   string `json:"address"`
-	Status    int    `json:"status"`
+	OrderId     int    `json:"order_id"`
+	CreatedById int    `json:"created_by_id"`
+	CreatedBy   string `json:"created_by"`
+	Issues      string `json:"issues"`
+	Address     string `json:"address"`
+	Status      int    `json:"status"`
 }
 
 type RateOrder struct {
