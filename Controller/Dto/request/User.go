@@ -15,9 +15,9 @@ type ReqDataUser struct {
 }
 
 type UserRegistration struct {
-	Username    string `json:"username" field:"required"`
-	Email       string `json:"email" field:"required"`
-	Password    string `json:"password" field:"required" min:"7"`
-	IsTechician bool   `json:"is_techician"`
-	Phone       string `json:"phone" field:"required"`
+	Username string `json:"username" field:"required"`
+	Email    string `json:"email" field:"required"`
+	Password string `json:"password" field:"required" min:"7"`
+	Role     bool   `json:"role"`
+	Phone    string `json:"phone" field:"required"`
 }

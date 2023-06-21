@@ -20,7 +20,7 @@ func (u user) RegisterNewAccounts(params request.UserRegistration) (response res
 	query := `INSERT INTO accounts.t_user_accounts (username, email, password, role, phone_number)
 				VALUES ($1, $2, $3, $4, $5) RETURNING username, email, TO_CHAR(created_at, 'DD-MM-YYYY HH:MI:SS')`
 	userRole := "CUSTOMER"
-	if params.IsTechician {
+	if params.Role {
 		userRole = "TECHNICIAN"
 	}
 	err = connection.QueryRow(query, params.Username, params.Email, params.Password, userRole, params.Phone).Scan(&response.Username, &response.Email, &response.CreatedAt)
@@ -43,7 +43,7 @@ func (u user) MyOrderList(userId int) (resp []response.MyOrderList, err error) {
 			LEFT JOIN accounts.t_user_accounts tac ON tac.id = tod.created_by
 			LEFT JOIN accounts.t_user_accounts tac2 on tac2.id = tod.taken_by
 			LEFT JOIN accounts.t_user_accounts_rating tacr on tacr.order_id = tod.id
-			WHERE tod.created_by = $1`
+			WHERE tod.created_by = $1 OR tod.taken_by = $1`
 	rows, err := connection.Query(query, userId)
 	if err != nil {
 		return
