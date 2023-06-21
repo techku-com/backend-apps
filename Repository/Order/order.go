@@ -22,7 +22,7 @@ func (o order) AllOrderList() (resp []response.AllOrders, err error) {
     			tod.status
 			FROM orders.t_orders tod
 			LEFT JOIN accounts.t_user_accounts tac ON tac.id = tod.created_by
-			WHERE tod.taken_by is NULL`
+			WHERE tod.taken_by is NULL AND tod.status = 1`
 	rows, err := connection.Query(query)
 	if err != nil {
 		return
