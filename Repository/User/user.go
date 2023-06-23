@@ -39,7 +39,9 @@ func (u user) MyOrderList(userId int) (resp []response.MyOrderList, err error) {
     			tod.issues, 
     			tod.status,
     			COALESCE(tacr.rating, 0),
-    			COALESCE(tacr.description, '')
+    			COALESCE(tacr.description, ''),
+    			tac.phone_number,
+    			COALESCE(tac2.phone_number, '')
 			FROM orders.t_orders tod
 			LEFT JOIN accounts.t_user_accounts tac ON tac.id = tod.created_by
 			LEFT JOIN accounts.t_user_accounts tac2 on tac2.id = tod.taken_by
@@ -54,7 +56,7 @@ func (u user) MyOrderList(userId int) (resp []response.MyOrderList, err error) {
 	for rows.Next() {
 		var order response.MyOrderList
 		err = rows.Scan(&order.OrderId, &order.CreatedByName, &order.TakenByName, &order.CreatedBy, &order.TakenBy, &order.CreatedAt, &order.Issues, &order.Status,
-			&order.Rating.Rating, &order.Rating.Description)
+			&order.Rating.Rating, &order.Rating.Description, &order.CustomerPhone, &order.TechnicianPhone)
 		if err != nil {
 			return
 		}

@@ -7,6 +7,7 @@ type AllOrders struct {
 	Issues      string `json:"issues"`
 	Address     string `json:"address"`
 	Status      int    `json:"status"`
+	PhoneNumber string `json:"phone_number"`
 }
 
 type RateOrder struct {

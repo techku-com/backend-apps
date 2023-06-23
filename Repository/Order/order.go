@@ -21,7 +21,8 @@ func (o order) AllOrderList() (resp []response.AllOrders, err error) {
     			tac.username, 
     			tod.issues, 
     			tod.address,
-    			tod.status
+    			tod.status,
+    			tac.phone_number
 			FROM orders.t_orders tod
 			LEFT JOIN accounts.t_user_accounts tac ON tac.id = tod.created_by
 			WHERE tod.taken_by is NULL AND tod.status = 1`
@@ -33,7 +34,7 @@ func (o order) AllOrderList() (resp []response.AllOrders, err error) {
 
 	for rows.Next() {
 		var order response.AllOrders
-		err = rows.Scan(&order.OrderId, &order.CreatedById, &order.CreatedBy, &order.Issues, &order.Address, &order.Status)
+		err = rows.Scan(&order.OrderId, &order.CreatedById, &order.CreatedBy, &order.Issues, &order.Address, &order.Status, &order.PhoneNumber)
 		if err != nil {
 			return
 		}
