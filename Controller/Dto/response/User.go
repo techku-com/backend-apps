@@ -19,7 +19,7 @@ type MyOrderList struct {
 	CreatedAt       string      `json:"created_at"`
 	Rating          OrderRating `json:"order_rating"`
 	CustomerPhone   string      `json:"customer_phone"`
-	TechnicianPhone string      `json:"technician-phone"`
+	TechnicianPhone string      `json:"technician_phone"`
 }
 
 type OrderRating struct {
