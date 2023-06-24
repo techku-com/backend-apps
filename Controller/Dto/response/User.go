@@ -20,6 +20,8 @@ type MyOrderList struct {
 	Rating          OrderRating `json:"order_rating"`
 	CustomerPhone   string      `json:"customer_phone"`
 	TechnicianPhone string      `json:"technician_phone"`
+	Price           int         `json:"price"`
+	Description     string      `json:"description"`
 }
 
 type OrderRating struct {
