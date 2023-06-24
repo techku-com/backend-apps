@@ -59,9 +59,9 @@ func (o order) RateOrder(params request.RateOrder) (resp response.RateOrder, err
 
 func (o order) UpdateOrder(params request.UpdateOrder) (resp response.UpdatedOrder, err error) {
 	connection := o.dbCon.PostgreMainCon()
-	query := `UPDATE orders.t_orders SET status = $1, taken_by = $4, updated_at = NOW(), price = $5, description = $6
+	query := `UPDATE orders.t_orders SET status = $1, taken_by = $4, updated_at = NOW()
 					WHERE id = $2 AND created_by = $3 RETURNING status, id`
-	err = connection.QueryRow(query, params.NewStatus, params.OrderId, params.UserId, params.TakenBy, params.Price, params.Description).Scan(&resp.Status, &resp.OrderId)
+	err = connection.QueryRow(query, params.NewStatus, params.OrderId, params.UserId, params.TakenBy).Scan(&resp.Status, &resp.OrderId)
 	if err != nil {
 		return
 	}
